@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_graph.xml"
+    app:startDestination="@id/loadsFragment">
+
+    <fragment
+        android:id="@+id/loadsFragment"
+        android:name="com.myapp.logistics.ui.fragment.LoadsFragment"
+        android:label="fragment_loads"
+        tools:layout="@layout/fragment_loads" >
+        <action
+            android:id="@+id/action_loadsFragment_to_addLoadFragment"
+            app:destination="@id/addLoadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/driversFragment2"
+        android:name="com.myapp.logistics.ui.fragment.DriversFragment"
+        android:label="fragment_drivers"
+        tools:layout="@layout/fragment_drivers" />
+    <fragment
+        android:id="@+id/addLoadFragment"
+        android:name="com.myapp.logistics.ui.fragment.AddLoadFragment"
+        android:label="fragment_add_load"
+        tools:layout="@layout/fragment_add_load" />
+</navigation>
