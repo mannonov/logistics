@@ -13,6 +13,7 @@ object Constants {
     const val CUSTOMER = "customer"
     const val DEADLINE = "deadline"
     const val DESCRIPTION = "description"
+    const val STATUS = "status"
 
     // Collections
     const val LOADS = "loads"

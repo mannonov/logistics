@@ -10,7 +10,8 @@ data class Load(
     var bPoint: Point? = null,
     var customer: String? = null,
     var deadline: String? = null,
-    var description: String? = null
+    var description: String? = null,
+    var status: String? = "active"
 ) {
 
     private val gson = Gson()
@@ -22,7 +23,8 @@ data class Load(
             Constants.B_POINT to gson.toJson(bPoint, pointType),
             Constants.CUSTOMER to customer.toString(),
             Constants.DEADLINE to deadline.toString(),
-            Constants.DESCRIPTION to description.toString()
+            Constants.DESCRIPTION to description.toString(),
+            Constants.STATUS to status.toString()
         )
     }
 }
