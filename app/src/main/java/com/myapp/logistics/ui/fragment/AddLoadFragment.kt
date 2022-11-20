@@ -8,14 +8,12 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.myapp.logistics.R
 import com.myapp.logistics.databinding.FragmentAddLoadBinding
-import com.myapp.logistics.ui.viewmodel.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddLoadFragment : Fragment(R.layout.fragment_add_load) {
 
     private val binding: FragmentAddLoadBinding by viewBinding(FragmentAddLoadBinding::bind)
-    private val adminVM by viewModels<AdminViewModel>({ requireParentFragment() })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,6 +22,5 @@ class AddLoadFragment : Fragment(R.layout.fragment_add_load) {
 
     override fun onResume() {
         super.onResume()
-        adminVM.botNavUIState.value = false
     }
 }

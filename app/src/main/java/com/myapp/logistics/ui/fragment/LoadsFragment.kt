@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.myapp.logistics.R
 import com.myapp.logistics.databinding.FragmentLoadsBinding
-import com.myapp.logistics.ui.viewmodel.AdminViewModel
 import com.myapp.logistics.util.onClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoadsFragment : Fragment(R.layout.fragment_loads) {
 
     private val binding: FragmentLoadsBinding by viewBinding(FragmentLoadsBinding::bind)
-    private val adminVM by viewModels<AdminViewModel>({ requireParentFragment() })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +25,5 @@ class LoadsFragment : Fragment(R.layout.fragment_loads) {
 
     override fun onResume() {
         super.onResume()
-        adminVM.botNavUIState.value = true
     }
 }
