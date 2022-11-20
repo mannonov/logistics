@@ -10,6 +10,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.myapp.logistics.repository.AddLoadRepository
 import com.myapp.logistics.repository.AddLoadRepositoryImpl
+import com.myapp.logistics.repository.LoadsRepository
+import com.myapp.logistics.repository.LoadsRepositoryImpl
 import com.myapp.logistics.util.LogisticsPref
 import dagger.Module
 import dagger.Provides
@@ -35,4 +37,7 @@ object AppModule {
 
     @Provides
     fun provideAddLoadRepository(firestore: FirebaseFirestore): AddLoadRepository = AddLoadRepositoryImpl(firestore = firestore)
+
+    @Provides
+    fun provideLoadsRepository(firestore: FirebaseFirestore): LoadsRepository = LoadsRepositoryImpl(firebaseFirestore = firestore)
 }

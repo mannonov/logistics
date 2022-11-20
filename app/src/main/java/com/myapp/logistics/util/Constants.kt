@@ -15,6 +15,11 @@ object Constants {
     const val DESCRIPTION = "description"
     const val STATUS = "status"
 
+    // Load Status
+    const val NEW = "new"
+    const val ACTIVE = "active"
+    const val COMPLETED = "completed"
+
     // Collections
     const val LOADS = "loads"
 }

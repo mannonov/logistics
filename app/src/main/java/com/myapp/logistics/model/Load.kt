@@ -11,11 +11,8 @@ data class Load(
     var customer: String? = null,
     var deadline: String? = null,
     var description: String? = null,
-    var status: String? = "active"
+    var status: String? = "new"
 ) {
-
-    private val gson = Gson()
-    private val pointType: Type = object : TypeToken<Point>() {}.type
 
     fun getHashMap(): HashMap<String, Any> {
         return hashMapOf(
@@ -26,5 +23,20 @@ data class Load(
             Constants.DESCRIPTION to description.toString(),
             Constants.STATUS to status.toString()
         )
+    }
+
+    companion object {
+        private val gson = Gson()
+        private val pointType: Type = object : TypeToken<Point>() {}.type
+        fun toObject(hashMap: Map<String, Any>): Load {
+            val load = Load()
+            load.aPoint = gson.fromJson(hashMap[Constants.A_POINT].toString(), pointType)
+            load.bPoint = gson.fromJson(hashMap[Constants.B_POINT].toString(), pointType)
+            load.customer = hashMap[Constants.CUSTOMER].toString()
+            load.deadline = hashMap[Constants.DEADLINE].toString()
+            load.description = hashMap[Constants.DESCRIPTION].toString()
+            load.status = hashMap[Constants.STATUS].toString()
+            return load
+        }
     }
 }
