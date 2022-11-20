@@ -16,7 +16,7 @@ class LoadsRepositoryImpl @Inject constructor(private val firebaseFirestore: Fir
                 documentSnapshot.data?.get(Constants.STATUS)?.let {
                     Log.d("sfbhjdsahj", "getNewLoads: $it")
                     if (it.toString() == Constants.NEW) {
-                        val load = Load.toObject(documentSnapshot.data!!)
+                        val load = Load.toObject(documentSnapshot.data!!,documentSnapshot.id)
                         loads.add(load)
                         Log.d("sfbhjdsahj", "getNewLoads: $load")
                     }

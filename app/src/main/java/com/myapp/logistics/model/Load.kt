@@ -6,6 +6,7 @@ import com.myapp.logistics.util.Constants
 import java.lang.reflect.Type
 
 data class Load(
+    var id: String? = null,
     var aPoint: Point? = null,
     var bPoint: Point? = null,
     var customer: String? = null,
@@ -28,7 +29,7 @@ data class Load(
     companion object {
         private val gson = Gson()
         private val pointType: Type = object : TypeToken<Point>() {}.type
-        fun toObject(hashMap: Map<String, Any>): Load {
+        fun toObject(hashMap: Map<String, Any>, id: String): Load {
             val load = Load()
             load.aPoint = gson.fromJson(hashMap[Constants.A_POINT].toString(), pointType)
             load.bPoint = gson.fromJson(hashMap[Constants.B_POINT].toString(), pointType)
