@@ -16,7 +16,7 @@ class LoadsRepositoryImpl @Inject constructor(private val firebaseFirestore: Fir
                 documentSnapshot.data?.get(Constants.STATUS)?.let {
                     Log.d("sfbhjdsahj", "getNewLoads: $it")
                     if (it.toString() == Constants.NEW) {
-                        val load = Load.toObject(documentSnapshot.data!!,documentSnapshot.id)
+                        val load = Load.toObject(documentSnapshot.data!!, documentSnapshot.id)
                         loads.add(load)
                         Log.d("sfbhjdsahj", "getNewLoads: $load")
                     }
@@ -27,10 +27,36 @@ class LoadsRepositoryImpl @Inject constructor(private val firebaseFirestore: Fir
     }
 
     override suspend fun getActiveLoads(result: (result: List<Load>) -> Unit) {
-        TODO("Not yet implemented")
+        val loads = ArrayList<Load>()
+        firebaseFirestore.collection(Constants.LOADS).get().addOnCompleteListener { task ->
+            task.result.documents.forEach { documentSnapshot ->
+                documentSnapshot.data?.get(Constants.STATUS)?.let {
+                    Log.d("sfbhjdsahj", "getNewLoads: $it")
+                    if (it.toString() == Constants.ACTIVE) {
+                        val load = Load.toObject(documentSnapshot.data!!, documentSnapshot.id)
+                        loads.add(load)
+                        Log.d("sfbhjdsahj", "getNewLoads: $load")
+                    }
+                }
+            }
+            result(loads)
+        }
     }
 
     override suspend fun getCompletedLoads(result: (result: List<Load>) -> Unit) {
-        TODO("Not yet implemented")
+        val loads = ArrayList<Load>()
+        firebaseFirestore.collection(Constants.LOADS).get().addOnCompleteListener { task ->
+            task.result.documents.forEach { documentSnapshot ->
+                documentSnapshot.data?.get(Constants.STATUS)?.let {
+                    Log.d("sfbhjdsahj", "getNewLoads: $it")
+                    if (it.toString() == Constants.COMPLETED) {
+                        val load = Load.toObject(documentSnapshot.data!!, documentSnapshot.id)
+                        loads.add(load)
+                        Log.d("sfbhjdsahj", "getNewLoads: $load")
+                    }
+                }
+            }
+            result(loads)
+        }
     }
 }

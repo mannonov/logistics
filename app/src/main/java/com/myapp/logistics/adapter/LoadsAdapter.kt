@@ -27,7 +27,7 @@ class LoadsAdapter : ListAdapter<Load, LoadsAdapter.ViewHolder>(loadDiffUtil()) 
             binding.apply {
                 binding.tvPointA.text = item.aPoint?.address.toString()
                 binding.tvPointB.text = item.bPoint?.address.toString()
-                binding.tvCustomer.text = item.customer.toString()
+                binding.tvCustomer.text = "Customer: ${item.customer}"
             }
         }
     }
