@@ -17,6 +17,7 @@ import com.myapp.logistics.model.Load
 import com.myapp.logistics.util.Outcome
 import com.myapp.logistics.util.addRepeatingJob
 import com.myapp.logistics.util.onClick
+import com.myapp.logistics.util.onTabSelected
 import com.myapp.logistics.viewmodel.LoadsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -41,6 +42,19 @@ class LoadsFragment : Fragment(R.layout.fragment_loads) {
         binding.rvLoads.apply {
             adapter = loadsAdapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+        binding.loadsTab.onTabSelected { position: Int ->
+            when (position) {
+                0 -> {
+                    viewModel.getNewLoads()
+                }
+                1 -> {
+                    viewModel.getActiveLoads()
+                }
+                2 -> {
+                    viewModel.getCompletedLoads()
+                }
+            }
         }
         viewModel.getNewLoads()
         viewLifecycleOwner.addRepeatingJob(Lifecycle.State.CREATED) {

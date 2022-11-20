@@ -4,6 +4,7 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.tabs.TabLayout
 
 inline fun <T : Toolbar> T.navOnClick(crossinline func: T.() -> Unit) =
     setNavigationOnClickListener { func() }
@@ -41,4 +42,17 @@ fun <T : View> T.hideWithAlphaAnimation() {
             animationEndListener { visibility = View.INVISIBLE }
         }
     )
+}
+
+inline fun <T : TabLayout> T.onTabSelected(crossinline func: T.(position: Int) -> Unit) {
+    this.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        override fun onTabSelected(tab: TabLayout.Tab?) {
+            tab?.position?.let { func(it) }
+        }
+
+        override fun onTabUnselected(tab: TabLayout.Tab?) {}
+        override fun onTabReselected(tab: TabLayout.Tab?) {
+            tab?.position?.let { func(it) }
+        }
+    })
 }

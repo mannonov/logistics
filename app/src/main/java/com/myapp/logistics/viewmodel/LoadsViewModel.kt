@@ -26,4 +26,22 @@ class LoadsViewModel @Inject constructor(private val repository: LoadsRepository
             }
         }
     }
+
+    fun getActiveLoads() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _loadFlow.emit(Outcome.loading(isLoading = true))
+            repository.getActiveLoads {
+                _loadFlow.value = Outcome.success(it)
+            }
+        }
+    }
+
+    fun getCompletedLoads() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _loadFlow.emit(Outcome.loading(isLoading = true))
+            repository.getCompletedLoads {
+                _loadFlow.value = Outcome.success(it)
+            }
+        }
+    }
 }
