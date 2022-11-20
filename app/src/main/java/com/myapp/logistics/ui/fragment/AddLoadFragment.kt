@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.myapp.logistics.R
 import com.myapp.logistics.databinding.FragmentAddLoadBinding
+import com.myapp.logistics.dialog.EnterPointDialog
+import com.myapp.logistics.model.Load
 import com.myapp.logistics.util.onClick
 import dagger.hilt.android.AndroidEntryPoint
+
+private const val POINT_A = 0
+private const val POINT_B = 1
 
 @AndroidEntryPoint
 class AddLoadFragment : BottomSheetDialogFragment() {
@@ -25,7 +29,23 @@ class AddLoadFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.btnLoad?.onClick {
-            Toast.makeText(requireContext(), "Bosildi", Toast.LENGTH_SHORT).show()
+            getLoadDataFromUI()
+        }
+        binding?.tieAPoint?.onClick {
+            showPointDialog(POINT_A)
+        }
+        binding?.tieBPoint?.onClick {
+            showPointDialog(POINT_B)
+        }
+    }
+
+    private fun showPointDialog(point: Int) {
+        EnterPointDialog(requireContext()).show()
+    }
+
+    private fun getLoadDataFromUI() {
+        val load = Load()
+        binding?.apply {
         }
     }
 

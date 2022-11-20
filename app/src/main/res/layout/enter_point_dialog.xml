@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.AddLoadFragment">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tv_new_load"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="New Load"
+        android:text="New Point"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,16 +23,16 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="15dp"
-        android:hint="Enter A Point"
+        android:hint="Enter Point Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_new_load">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tie_a_point"
+            android:id="@+id/tie_point_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
+            android:inputType="textEmailAddress"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -46,16 +44,16 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="10dp"
-        android:hint="Enter B Point"
+        android:hint="Enter Latitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_point_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tie_b_point"
+            android:id="@+id/tie_point_lat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
+            android:inputType="number"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -67,58 +65,16 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="10dp"
-        android:hint="Enter Customer"
+        android:hint="Enter Longitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_point_lat">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tie_customer"
+            android:id="@+id/tie_point_lng"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:singleLine="true" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_deadline"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="10dp"
-        android:hint="Enter Deadline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_point_lng">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tie_deadline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:singleLine="true" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_description"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="10dp"
-        android:hint="Enter Description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_deadline">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tie_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -131,9 +87,9 @@
         android:layout_marginBottom="10dp"
         android:text="Add Load"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/til_description"
-        app:layout_constraintStart_toStartOf="@+id/til_description"
-        app:layout_constraintTop_toBottomOf="@+id/til_description"
+        app:layout_constraintEnd_toEndOf="@+id/til_point_lng"
+        app:layout_constraintStart_toStartOf="@+id/til_point_lng"
+        app:layout_constraintTop_toBottomOf="@+id/til_point_lng"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
