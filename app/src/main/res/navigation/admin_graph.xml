@@ -19,7 +19,7 @@
         android:name="com.myapp.logistics.ui.fragment.DriversFragment"
         android:label="fragment_drivers"
         tools:layout="@layout/fragment_drivers" />
-    <fragment
+    <dialog
         android:id="@+id/addLoadFragment"
         android:name="com.myapp.logistics.ui.fragment.AddLoadFragment"
         android:label="fragment_add_load"

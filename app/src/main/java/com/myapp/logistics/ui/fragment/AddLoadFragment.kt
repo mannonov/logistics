@@ -1,26 +1,33 @@
 package com.myapp.logistics.ui.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.myapp.logistics.R
 import com.myapp.logistics.databinding.FragmentAddLoadBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddLoadFragment : Fragment(R.layout.fragment_add_load) {
+class AddLoadFragment : BottomSheetDialogFragment() {
 
-    private val binding: FragmentAddLoadBinding by viewBinding(FragmentAddLoadBinding::bind)
+    private var binding: FragmentAddLoadBinding? = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_add_load, container, false)
+        binding = FragmentAddLoadBinding.bind(view)
+        return binding?.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Toast.makeText(requireContext(), "${parentFragment?.javaClass?.simpleName}", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
