@@ -5,7 +5,11 @@ import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.myapp.logistics.repository.AddLoadRepository
+import com.myapp.logistics.repository.AddLoadRepositoryImpl
 import com.myapp.logistics.util.LogisticsPref
 import dagger.Module
 import dagger.Provides
@@ -21,8 +25,14 @@ object AppModule {
     fun provideFirebaseAuth(): FirebaseAuth = Firebase.auth
 
     @Provides
+    fun provideFirebaseFireStore(): FirebaseFirestore = Firebase.firestore
+
+    @Provides
     fun provideSharedPref(@ApplicationContext context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     @Provides
     fun provideLogisticsSharedPref(sharedPreferences: SharedPreferences): LogisticsPref = LogisticsPref(sharedPreferences = sharedPreferences)
+
+    @Provides
+    fun provideAddLoadRepository(firestore: FirebaseFirestore): AddLoadRepository = AddLoadRepositoryImpl(firestore = firestore)
 }
