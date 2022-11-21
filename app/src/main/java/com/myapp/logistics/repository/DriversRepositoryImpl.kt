@@ -1,5 +1,6 @@
 package com.myapp.logistics.repository
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.myapp.logistics.model.Driver
 import com.myapp.logistics.util.Constants
@@ -14,6 +15,10 @@ class DriversRepositoryImpl @Inject constructor(private val firestore: FirebaseF
             task.result.documents.forEach { documentSnapshot ->
                 val driver = documentSnapshot.toObject(Driver::class.java)
                 driver?.id = documentSnapshot.id
+                if (driver != null) {
+                    drivers.add(driver)
+                }
+                Log.d("driversres", "getDrivers: $driver")
             }
             result(drivers)
         }
