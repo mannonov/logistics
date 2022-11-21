@@ -20,6 +20,11 @@ object Constants {
     const val ACTIVE = "active"
     const val COMPLETED = "completed"
 
+    // Driver
+    const val FIO = "fio"
+    const val CAR = "car"
+    const val PHONE_NUMBER = "phoneNumber"
+
     // Collections
     const val LOADS = "loads"
     const val DRIVERS = "drivers"

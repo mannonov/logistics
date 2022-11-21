@@ -1,4 +1,8 @@
 package com.myapp.logistics.repository
 
-class DriversRepository {
+import com.myapp.logistics.model.Driver
+
+interface DriversRepository {
+
+    suspend fun getDrivers(result: (result: List<Driver>) -> Unit)
 }
