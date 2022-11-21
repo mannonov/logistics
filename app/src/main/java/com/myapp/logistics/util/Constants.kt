@@ -24,6 +24,8 @@ object Constants {
     const val FIO = "fio"
     const val CAR = "car"
     const val PHONE_NUMBER = "phoneNumber"
+    const val USER_NAME = "userName"
+    const val PASSWORD = "password"
 
     // Collections
     const val LOADS = "loads"

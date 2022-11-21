@@ -67,7 +67,9 @@ class AddDriverFragment : BottomSheetDialogFragment() {
             id = null,
             fio = binding?.tieFio?.text.toString(),
             car = binding?.tieCar?.text.toString(),
-            phoneNumber = binding?.tiePhoneNumber?.text.toString()
+            phoneNumber = binding?.tiePhoneNumber?.text.toString(),
+            userName = binding?.tieUserName?.text.toString(),
+            password = binding?.tiePassword?.text.toString()
         )
     }
 

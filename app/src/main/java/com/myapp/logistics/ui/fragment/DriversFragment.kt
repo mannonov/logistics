@@ -8,9 +8,12 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.myapp.logistics.R
+import com.myapp.logistics.adapter.DriversAdapter
 import com.myapp.logistics.databinding.FragmentDriversBinding
+import com.myapp.logistics.model.Driver
 import com.myapp.logistics.util.Outcome
 import com.myapp.logistics.util.addRepeatingJob
 import com.myapp.logistics.util.onClick
@@ -25,6 +28,7 @@ class DriversFragment : Fragment(R.layout.fragment_drivers) {
 
     private val binding: FragmentDriversBinding by viewBinding(FragmentDriversBinding::bind)
     private val viewModel by viewModels<DriversViewModel>()
+    private val driversAdapter: DriversAdapter = DriversAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +37,10 @@ class DriversFragment : Fragment(R.layout.fragment_drivers) {
         }
         setFragmentResultListener(AddDriverFragment::class.java.simpleName) { request, bundle ->
             viewModel.getDrivers()
+        }
+        binding.rvDrivers.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = driversAdapter
         }
         viewModel.getDrivers()
         viewLifecycleOwner.addRepeatingJob(Lifecycle.State.CREATED) {
@@ -45,10 +53,15 @@ class DriversFragment : Fragment(R.layout.fragment_drivers) {
                         Toast.makeText(requireContext(), "Failure...", Toast.LENGTH_SHORT).show()
                     }
                     is Outcome.Success -> withContext(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), "Success... ${it.data}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Success...", Toast.LENGTH_SHORT).show()
+                        setDriversData(it.data)
                     }
                 }
             }
         }
+    }
+
+    private fun setDriversData(list: List<Driver>) {
+        driversAdapter.submitList(list)
     }
 }
