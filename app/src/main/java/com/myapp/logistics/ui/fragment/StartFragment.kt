@@ -28,7 +28,7 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         when (prefs.userType) {
             Constants.DEFAULT_USER_TYPE -> findNavController().navigate(StartFragmentDirections.actionStartFragmentToSignInFragment())
             Constants.ADMIN_USER_TYPE -> findNavController().navigate(StartFragmentDirections.actionStartFragmentToAdminFragment())
-            Constants.DRIVER_USER_TYPE -> Unit
+            Constants.DRIVER_USER_TYPE -> findNavController().navigate(StartFragmentDirections.actionStartFragmentToDriverFragment())
         }
     }
 }

@@ -37,6 +37,7 @@ data class Load(
             load.deadline = hashMap[Constants.DEADLINE].toString()
             load.description = hashMap[Constants.DESCRIPTION].toString()
             load.status = hashMap[Constants.STATUS].toString()
+            load.id = id
             return load
         }
     }
