@@ -18,10 +18,19 @@
         android:id="@+id/driversFragment2"
         android:name="com.myapp.logistics.ui.fragment.DriversFragment"
         android:label="fragment_drivers"
-        tools:layout="@layout/fragment_drivers" />
+        tools:layout="@layout/fragment_drivers" >
+        <action
+            android:id="@+id/action_driversFragment2_to_addDriverFragment"
+            app:destination="@id/addDriverFragment" />
+    </fragment>
     <dialog
         android:id="@+id/addLoadFragment"
         android:name="com.myapp.logistics.ui.fragment.AddLoadFragment"
         android:label="fragment_add_load"
         tools:layout="@layout/fragment_add_load" />
+    <dialog
+        android:id="@+id/addDriverFragment"
+        android:name="com.myapp.logistics.ui.fragment.AddDriverFragment"
+        android:label="fragment_add_driver"
+        tools:layout="@layout/fragment_add_driver" />
 </navigation>

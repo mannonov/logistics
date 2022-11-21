@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_new_load"
+        android:id="@+id/tv_new_driver"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_point_name"
+        android:id="@+id/til_fio"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         android:hint="Enter Point Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_new_load">
+        app:layout_constraintTop_toBottomOf="@+id/tv_new_driver">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_point_name"
@@ -38,7 +38,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_point_lat"
+        android:id="@+id/til_car"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         android:hint="Enter Latitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_point_name">
+        app:layout_constraintTop_toBottomOf="@+id/til_fio">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_point_lat"
@@ -59,7 +59,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_point_lng"
+        android:id="@+id/til_phone_number"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
         android:hint="Enter Longitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_point_lat">
+        app:layout_constraintTop_toBottomOf="@+id/til_car">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_point_lng"
@@ -87,9 +87,9 @@
         android:layout_marginBottom="10dp"
         android:text="Add Load"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/til_point_lng"
-        app:layout_constraintStart_toStartOf="@+id/til_point_lng"
-        app:layout_constraintTop_toBottomOf="@+id/til_point_lng"
+        app:layout_constraintEnd_toEndOf="@+id/til_phone_number"
+        app:layout_constraintStart_toStartOf="@+id/til_phone_number"
+        app:layout_constraintTop_toBottomOf="@+id/til_phone_number"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

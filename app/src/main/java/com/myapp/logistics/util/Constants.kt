@@ -22,4 +22,5 @@ object Constants {
 
     // Collections
     const val LOADS = "loads"
+    const val DRIVERS = "drivers"
 }
