@@ -12,7 +12,8 @@ data class Load(
     var customer: String? = null,
     var deadline: String? = null,
     var description: String? = null,
-    var status: String? = "new"
+    var status: String? = "new",
+    var attachedDriverId: String? = null
 ) {
 
     fun getHashMap(): HashMap<String, Any> {
