@@ -46,4 +46,7 @@ object AppModule {
 
     @Provides
     fun provideSignInRepository(firestore: FirebaseFirestore): SignInRepository = SignInRepositoryImpl(firestore = firestore)
+
+    @Provides
+    fun provideDriverLoadsRepository(firestore: FirebaseFirestore): DriverLoadsRepository = DriverLoadsRepositoryImpl(firestore = firestore)
 }
