@@ -33,4 +33,9 @@
         android:name="com.myapp.logistics.ui.fragment.AddDriverFragment"
         android:label="fragment_add_driver"
         tools:layout="@layout/fragment_add_driver" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.myapp.logistics.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

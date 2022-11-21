@@ -22,6 +22,10 @@ class LogisticsPref @Inject constructor(private val sharedPreferences: SharedPre
         get() = gson.fromJson(sharedPreferences.getString(DRIVER, gson.toJson(Driver(), driverType)), driverType)
         set(value) = sharedPreferences.edit().putString(DRIVER, gson.toJson(value)).apply()
 
+    fun clearSharedPref() {
+        sharedPreferences.edit().clear().apply()
+    }
+
     companion object {
         const val USER_TYPE = "user_type"
         const val DRIVER = "driver"
