@@ -43,6 +43,11 @@ class LoadsFragment : Fragment(R.layout.fragment_loads) {
             adapter = loadsAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+        loadsAdapter.setLoadClickListener(
+            loadClickedListener = LoadsAdapter.LoadClickedListener {
+                findNavController().navigate(LoadsFragmentDirections.actionLoadsFragmentToLoadInfoFragment2(it))
+            }
+        )
         binding.loadsTab.onTabSelected { position: Int ->
             when (position) {
                 0 -> {

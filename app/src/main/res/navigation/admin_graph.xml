@@ -45,5 +45,9 @@
         android:id="@+id/loadInfoFragment2"
         android:name="com.myapp.logistics.ui.fragment.LoadInfoFragment"
         android:label="fragment_load_info"
-        tools:layout="@layout/fragment_load_info" />
+        tools:layout="@layout/fragment_load_info" >
+        <argument
+            android:name="load"
+            app:argType="com.myapp.logistics.model.Load" />
+    </fragment>
 </navigation>

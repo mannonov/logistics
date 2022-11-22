@@ -25,5 +25,8 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
             .findFragmentById(R.id.container_nav_host) as NavHostFragment
         val navController = navHostFragment.navController
         binding.navigationBar.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+//            when(destination.id == )
+        }
     }
 }
