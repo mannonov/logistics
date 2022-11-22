@@ -74,7 +74,7 @@ class DriverLoadsFragment : Fragment(R.layout.fragment_driver_loads) {
         }
         loadsAdapter.setLoadClickListener(
             loadClickedListener = LoadsAdapter.LoadClickedListener {
-                findNavController().navigate(DriverLoadsFragmentDirections.actionDriverLoadsFragmentToLoadInfoFragment())
+                findNavController().navigate(DriverLoadsFragmentDirections.actionDriverLoadsFragmentToLoadInfoFragment(it))
             }
         )
     }

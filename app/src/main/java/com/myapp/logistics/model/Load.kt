@@ -3,6 +3,7 @@ package com.myapp.logistics.model
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.myapp.logistics.util.Constants
+import java.io.Serializable
 import java.lang.reflect.Type
 
 data class Load(
@@ -14,7 +15,7 @@ data class Load(
     var description: String? = null,
     var status: String? = "new",
     var attachedDriverId: String? = null
-) {
+) : Serializable {
 
     fun getHashMap(): HashMap<String, Any> {
         return hashMapOf(
