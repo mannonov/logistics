@@ -18,7 +18,7 @@ class LogisticsApplication : Application() {
     }
     private fun initializeHERESDK() {
         val accessKeyID = getString(R.string.here_sdk_api_key_value)
-        val accessKeySecret = getString(R.string.here_sdk_api_key_value)
+        val accessKeySecret = getString(R.string.here_sdk_secret_key_value)
         val options = SDKOptions(accessKeyID, accessKeySecret)
         try {
             val context: Context = this
