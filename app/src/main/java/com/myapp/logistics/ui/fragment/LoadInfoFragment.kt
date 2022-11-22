@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -22,6 +21,7 @@ import com.myapp.logistics.map.camera.CameraStartMovingListener
 import com.myapp.logistics.map.marker.AbstractMarkerOptions
 import com.myapp.logistics.map.polyline.AbstractPolylineOptions
 import com.myapp.logistics.model.Load
+import com.myapp.logistics.util.Constants
 import com.myapp.logistics.util.Outcome
 import com.myapp.logistics.util.addRepeatingJob
 import com.myapp.logistics.viewmodel.LoadInfoViewModel
@@ -40,10 +40,34 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initMap(args.load)
+        setData(args.load)
         viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
             viewModel.routeFlow.collect { outcome ->
                 if (outcome is Outcome.Success) {
                     addPolyline(outcome.data)
+                }
+            }
+        }
+    }
+
+    private fun setData(load: Load) {
+        with(binding) {
+            tvPointA.text = load.aPoint?.address.toString()
+            tvPointB.text = load.bPoint?.address.toString()
+            tvCustomer.text = "Customer: ${load.customer ?: "Unknown"}"
+            when (load.status) {
+                Constants.NEW -> {
+                    containerDriver.visibility = View.GONE
+                    btnAcceptOrder.visibility = View.GONE
+                    btnFinishOrder.visibility = View.GONE
+                    btnCallDriver.visibility = View.GONE
+                }
+                Constants.ACTIVE -> {
+                    btnAcceptOrder.visibility = View.GONE
+                }
+                Constants.COMPLETED -> {
+                    btnAcceptOrder.visibility = View.GONE
+                    btnFinishOrder.visibility = View.GONE
                 }
             }
         }
@@ -94,14 +118,8 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
     }
 
     private fun addPolyline(route: Route) {
-        Toast.makeText(
-            requireContext(),
-            "eta = ${route.duration.toHours()}:${route.duration.toMinutes()}:${route.duration.toSeconds()} \n" +
-                "traffic delay h: ${route.trafficDelay.toHours()} \n" +
-                "route handle : ${route.routeHandle?.handle} \n" +
-                "length ${route.lengthInMeters} meters",
-            Toast.LENGTH_SHORT
-        ).show()
+        binding.tvEta.text = "Eta: ${route.duration.toMinutes() / 60} hours ${route.duration.toMinutes() % 60} minute"
+        binding.tvLength.text = "Length: ${route.lengthInMeters * 0.001} km"
         val polyline = AbstractPolylineOptions()
         route.geometry.vertices.forEach {
             Log.d("dataRoad", "addPolyline: ${it.latitude} ${it.longitude}")

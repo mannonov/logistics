@@ -1,8 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/google_map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.LoadInfoFragment" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.LoadInfoFragment">
+
+    <fragment
+        android:id="@+id/google_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:background="@color/white"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_load"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_load"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Load Info:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/img_a_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_b_point"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_load" />
+
+            <TextView
+                android:id="@+id/tv_point_a"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:singleLine="true"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/img_a_point"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_a_point"
+                app:layout_constraintTop_toTopOf="@+id/img_a_point"
+                tools:text="fbshjbgjhfdsbghjdbfsghjbdsfjhgbdjkfsbgjhdfsbkgjkhdfsbgjhkdsfbgjhsdfjb" />
+
+            <ImageView
+                android:id="@+id/img_b_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_a_point"
+                app:layout_constraintStart_toStartOf="@+id/img_a_point"
+                app:layout_constraintTop_toBottomOf="@+id/img_a_point" />
+
+            <TextView
+                android:id="@+id/tv_point_b"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:singleLine="true"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/img_b_point"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_b_point"
+                app:layout_constraintTop_toTopOf="@+id/img_b_point"
+                tools:text="fbshjbgjhfdsbghjdbfsghjbdsfjhgbdjkfsbgjhdfsbkgjkhdfsbgjhkdsfbgjhsdfjb" />
+
+
+            <TextView
+                android:id="@+id/tv_customer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:singleLine="true"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_point_b"
+                app:layout_constraintStart_toStartOf="@+id/img_b_point"
+                app:layout_constraintTop_toBottomOf="@+id/tv_point_b"
+                tools:text="Customer: Hikmat aka" />
+
+            <TextView
+                android:id="@+id/tv_eta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_customer"
+                app:layout_constraintStart_toStartOf="@+id/tv_customer"
+                app:layout_constraintTop_toBottomOf="@+id/tv_customer"
+                android:text="Eta: Calculating..." />
+
+            <TextView
+                android:id="@+id/tv_length"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_customer"
+                app:layout_constraintStart_toStartOf="@+id/tv_customer"
+                app:layout_constraintTop_toBottomOf="@+id/tv_eta"
+                android:text="Length: Calculating..." />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_driver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/container_load">
+
+            <TextView
+                android:id="@+id/tv_driver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Driver:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_driver"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_driver"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_driver" />
+
+            <TextView
+                android:id="@+id/tv_driver_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/img_driver"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_driver"
+                app:layout_constraintTop_toTopOf="@+id/img_driver"
+                tools:text="Hikmatilla Karimov Siuuuu" />
+
+            <ImageView
+                android:id="@+id/img_car"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_car"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_driver" />
+
+            <TextView
+                android:id="@+id/tv_driver_car"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/img_car"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_car"
+                app:layout_constraintTop_toTopOf="@+id/img_car"
+                tools:text="Spark 01 R 889 NB" />
+
+            <ImageView
+                android:id="@+id/img_phone"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_phone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_car" />
+
+            <TextView
+                android:id="@+id/tv_driver_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/img_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_phone"
+                app:layout_constraintTop_toTopOf="@+id/img_phone"
+                tools:text="+998 99 558 12 34" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_call_driver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:drawableLeft="@drawable/ic_call"
+            android:text="Call to Driver"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/container_driver" />
+
+        <Button
+            android:id="@+id/btn_accept_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:drawableLeft="@drawable/ic_accept"
+            android:text="Accept Order"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_call_driver" />
+
+        <Button
+            android:id="@+id/btn_finish_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:drawableLeft="@drawable/ic_accept"
+            android:text="End Order"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_accept_order" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
