@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.here.sdk.routing.Route
 import com.myapp.logistics.R
 import com.myapp.logistics.databinding.FragmentLoadInfoBinding
@@ -87,6 +88,8 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                 abstractMap?.moveCamera(position.lat ?: 0.0, position.lng ?: 0.0, false, 17F)
             }
             viewModel.getRoute(aPoint!!, bPoint!!)
+            abstractMap?.moveCamera(LatLng(aPoint?.lat ?: 0.0, aPoint?.lng ?: 0.0), LatLng(bPoint?.lat ?: 0.0, bPoint?.lng ?: 0.0), 200, true, null)
+//            changeGotoMyLocationState(true)
         }
     }
 
