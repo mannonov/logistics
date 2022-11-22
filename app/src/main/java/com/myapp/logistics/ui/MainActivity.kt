@@ -9,10 +9,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import com.myapp.logistics.R
+import com.myapp.logistics.util.Constants
+import com.myapp.logistics.util.LogisticsPref
 import com.myapp.logistics.util.Outcome
 import com.myapp.logistics.util.addRepeatingJob
 import com.myapp.logistics.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -21,12 +24,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var runnable: Runnable
 
+    @Inject
+    lateinit var prefs: LogisticsPref
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         addRepeatingJob(Lifecycle.State.STARTED) {
             viewModel.lastLocation.collect { outcome ->
                 if (outcome is Outcome.Success) {
+                    viewModel.updateDriverLocation(prefs.driver, outcome.data)
                 }
             }
         }
@@ -37,7 +44,9 @@ class MainActivity : AppCompatActivity() {
             )
         )
         runnable = Runnable {
-            viewModel.getLastKnownLocation()
+            if (prefs.userType == Constants.DRIVER_USER_TYPE) {
+                viewModel.getLastKnownLocation()
+            }
             Handler().postDelayed(runnable, 5000)
         }
 
