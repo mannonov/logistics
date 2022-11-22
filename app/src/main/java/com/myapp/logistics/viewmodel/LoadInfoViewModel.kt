@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.here.sdk.routing.Route
 import com.myapp.logistics.map.AbstractPosition
+import com.myapp.logistics.model.Driver
 import com.myapp.logistics.model.Load
 import com.myapp.logistics.repository.LoadInfoRepository
 import com.myapp.logistics.util.Outcome
@@ -57,6 +58,18 @@ class LoadInfoViewModel @Inject constructor(private val repository: LoadInfoRepo
                 } else {
                     _acceptLoadFlow.value = Outcome.failure(Throwable("Something went wrong"))
                 }
+            }
+        }
+    }
+
+    private val _driverFlow = MutableStateFlow<Outcome<Driver>>(Outcome.loading(isLoading = false))
+    val driverFlow = _driverFlow.asStateFlow()
+
+    fun getDriverData(id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _driverFlow.value = Outcome.loading(true)
+            repository.getDriverData(id) {
+                _driverFlow.value = Outcome.success(it)
             }
         }
     }
