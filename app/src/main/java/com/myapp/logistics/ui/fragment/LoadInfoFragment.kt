@@ -62,6 +62,14 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                 }
             }
         }
+        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
+            viewModel.finishLoadFlow.collect { outcome ->
+                if (outcome is Outcome.Success) {
+                    setFragmentResult(this@LoadInfoFragment.javaClass.simpleName, bundleOf(Constants.ORDER_STATUS to Constants.COMPLETED))
+                    findNavController().popBackStack()
+                }
+            }
+        }
         binding.btnAcceptOrder.onClick {
             with(LogisticDialog(requireContext(), "Are you sure accept Order?")) {
                 setYesClickListener(
@@ -76,7 +84,7 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
             with(LogisticDialog(requireContext(), "Are you sure finish Order?")) {
                 setYesClickListener(
                     yesClickListener = LogisticDialog.YesClickListener {
-                        viewModel.acceptLoad(args.load, prefs.driver.id.toString())
+                        viewModel.finishLoad(args.load)
                     }
                 )
                 show()
