@@ -9,10 +9,19 @@
         android:id="@+id/driverLoadsFragment"
         android:name="com.myapp.logistics.ui.fragment.DriverLoadsFragment"
         android:label="fragment_driver_loads"
-        tools:layout="@layout/fragment_driver_loads" />
+        tools:layout="@layout/fragment_driver_loads" >
+        <action
+            android:id="@+id/action_driverLoadsFragment_to_loadInfoFragment"
+            app:destination="@id/loadInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment2"
         android:name="com.myapp.logistics.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/loadInfoFragment"
+        android:name="com.myapp.logistics.ui.fragment.LoadInfoFragment"
+        android:label="fragment_load_info"
+        tools:layout="@layout/fragment_load_info" />
 </navigation>

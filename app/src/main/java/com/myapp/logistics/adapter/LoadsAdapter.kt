@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.myapp.logistics.R
 import com.myapp.logistics.databinding.ItemLoadBinding
 import com.myapp.logistics.model.Load
+import com.myapp.logistics.util.onClick
 
 class LoadsAdapter : ListAdapter<Load, LoadsAdapter.ViewHolder>(loadDiffUtil()) {
+
+    private lateinit var loadClickedListener: LoadClickedListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_load, parent, false)
@@ -20,6 +23,11 @@ class LoadsAdapter : ListAdapter<Load, LoadsAdapter.ViewHolder>(loadDiffUtil()) 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+        holder.itemView.onClick {
+            if (this@LoadsAdapter::loadClickedListener.isInitialized) {
+                loadClickedListener.onClick(item)
+            }
+        }
     }
 
     class ViewHolder(private val binding: ItemLoadBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -31,6 +39,12 @@ class LoadsAdapter : ListAdapter<Load, LoadsAdapter.ViewHolder>(loadDiffUtil()) 
             }
         }
     }
+
+    fun setLoadClickListener(loadClickedListener: LoadClickedListener) {
+        this.loadClickedListener = loadClickedListener
+    }
+
+    class LoadClickedListener(val onClick: (load: Load) -> Unit)
 
     companion object {
         fun loadDiffUtil() = object : DiffUtil.ItemCallback<Load>() {
