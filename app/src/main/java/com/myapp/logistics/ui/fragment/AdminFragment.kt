@@ -26,7 +26,14 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
         val navController = navHostFragment.navController
         binding.navigationBar.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-//            when(destination.id == )
+            when (destination.id) {
+                R.id.loadInfoFragment2 -> showBottomNavigation(false)
+                else -> showBottomNavigation(true)
+            }
         }
+    }
+
+    private fun showBottomNavigation(boolean: Boolean) {
+        binding.navigationBar.visibility = if (boolean) View.VISIBLE else View.GONE
     }
 }
