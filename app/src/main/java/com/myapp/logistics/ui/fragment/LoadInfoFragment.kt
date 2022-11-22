@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.here.sdk.routing.Route
 import com.myapp.logistics.R
 import com.myapp.logistics.databinding.FragmentLoadInfoBinding
@@ -43,15 +44,32 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
     private val viewModel by viewModels<LoadInfoViewModel>()
     private var aPoint: AbstractPosition? = null
     private var bPoint: AbstractPosition? = null
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initMap(args.load)
         setData(args.load)
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+        bottomSheetBehavior.apply {
+            isHideable = false
+            peekHeight = 900
+            isDraggable = true
+        }
         viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
             viewModel.routeFlow.collect { outcome ->
                 if (outcome is Outcome.Success) {
                     addPolyline(outcome.data)
+                    abstractMap?.addMarker(
+                        AbstractMarkerOptions<Any>(aPoint!!).apply {
+                            icon = R.drawable.ic_point_start
+                        }
+                    )
+                    abstractMap?.addMarker(
+                        AbstractMarkerOptions<Any>(bPoint!!).apply {
+                            icon = R.drawable.ic_point_end
+                        }
+                    )
                 }
             }
         }
@@ -151,16 +169,6 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                 }
             }
         }
-        abstractMap?.addMarker(
-            AbstractMarkerOptions<Any>(aPoint!!).apply {
-                icon = R.drawable.ic_point_start
-            }
-        )
-        abstractMap?.addMarker(
-            AbstractMarkerOptions<Any>(bPoint!!).apply {
-                icon = R.drawable.ic_point_end
-            }
-        )
     }
 
     private fun setDriverData(driver: Driver) {
