@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.LoadInfoFragment">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/google_map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
@@ -210,7 +210,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_driver"
                 app:layout_constraintTop_toTopOf="@+id/img_driver"
-                tools:text="Hikmatilla Karimov Siuuuu" />
+                android:text="Loading...." />
 
             <ImageView
                 android:id="@+id/img_car"
@@ -232,7 +232,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_car"
                 app:layout_constraintTop_toTopOf="@+id/img_car"
-                tools:text="Spark 01 R 889 NB" />
+                android:text="Loading...." />
 
             <ImageView
                 android:id="@+id/img_phone"
@@ -255,7 +255,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_phone"
                 app:layout_constraintTop_toTopOf="@+id/img_phone"
-                tools:text="+998 99 558 12 34" />
+                android:text="Loading...." />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

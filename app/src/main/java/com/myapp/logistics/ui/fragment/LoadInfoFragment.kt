@@ -24,6 +24,7 @@ import com.myapp.logistics.map.GoogleMapsImpl
 import com.myapp.logistics.map.camera.CameraStartMovingListener
 import com.myapp.logistics.map.marker.AbstractMarkerOptions
 import com.myapp.logistics.map.polyline.AbstractPolylineOptions
+import com.myapp.logistics.model.Driver
 import com.myapp.logistics.model.Load
 import com.myapp.logistics.util.*
 import com.myapp.logistics.viewmodel.LoadInfoViewModel
@@ -63,6 +64,13 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
             }
         }
         viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
+            viewModel.driverFlow.collect { outcome ->
+                if (outcome is Outcome.Success) {
+                    setDriverData(driver = outcome.data)
+                }
+            }
+        }
+        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
             viewModel.finishLoadFlow.collect { outcome ->
                 if (outcome is Outcome.Success) {
                     setFragmentResult(this@LoadInfoFragment.javaClass.simpleName, bundleOf(Constants.ORDER_STATUS to Constants.COMPLETED))
@@ -93,6 +101,9 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
     }
 
     private fun setData(load: Load) {
+        if (load.attachedDriverId != null) {
+            viewModel.getDriverData(load.attachedDriverId.toString())
+        }
         with(binding) {
             tvPointA.text = load.aPoint?.address.toString()
             tvPointB.text = load.bPoint?.address.toString()
@@ -140,6 +151,19 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                 }
             }
         }
+    }
+
+    private fun setDriverData(driver: Driver) {
+        with(binding) {
+            tvDriverName.text = driver.fio
+            tvDriverCar.text = driver.car
+            tvDriverPhone.text = driver.phoneNumber
+        }
+        abstractMap?.addMarker(
+            AbstractMarkerOptions<Any>(AbstractPosition(driver.lat ?: 0.0, driver.lng ?: 0.0)).apply {
+                icon = R.drawable.ic_png_car
+            }
+        )
     }
 
     private fun initMap(load: Load) {
