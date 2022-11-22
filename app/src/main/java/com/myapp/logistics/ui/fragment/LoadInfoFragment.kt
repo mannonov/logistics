@@ -151,6 +151,16 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                 }
             }
         }
+        abstractMap?.addMarker(
+            AbstractMarkerOptions<Any>(aPoint!!).apply {
+                icon = R.drawable.ic_point_start
+            }
+        )
+        abstractMap?.addMarker(
+            AbstractMarkerOptions<Any>(bPoint!!).apply {
+                icon = R.drawable.ic_point_end
+            }
+        )
     }
 
     private fun setDriverData(driver: Driver) {
@@ -161,7 +171,7 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
         }
         abstractMap?.addMarker(
             AbstractMarkerOptions<Any>(AbstractPosition(driver.lat ?: 0.0, driver.lng ?: 0.0)).apply {
-                icon = R.drawable.ic_png_car
+                icon = R.drawable.ic_pin_busy
             }
         )
     }
@@ -186,16 +196,6 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
             }
             aPoint = AbstractPosition(load.aPoint?.lat ?: 0.0, load.aPoint?.lng ?: 0.0)
             bPoint = AbstractPosition(load.bPoint?.lat ?: 0.0, load.bPoint?.lng ?: 0.0)
-            googleMapsImpl.addMarker(
-                AbstractMarkerOptions<Any>(aPoint!!).apply {
-                    icon = R.drawable.point
-                }
-            )
-            googleMapsImpl.addMarker(
-                AbstractMarkerOptions<Any>(bPoint!!).apply {
-                    icon = R.drawable.point
-                }
-            )
             abstractMap?.setOnCameraMoveStartedListener(object : CameraStartMovingListener {
                 override fun onEvent(reason: Int) {
 //                    changeGotoMyLocationState(false)
