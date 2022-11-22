@@ -4,6 +4,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.SupportMapFragment
@@ -15,6 +17,9 @@ import com.myapp.logistics.map.GoogleMapsImpl
 import com.myapp.logistics.map.camera.CameraStartMovingListener
 import com.myapp.logistics.map.marker.AbstractMarkerOptions
 import com.myapp.logistics.model.Load
+import com.myapp.logistics.util.Outcome
+import com.myapp.logistics.util.addRepeatingJob
+import com.myapp.logistics.viewmodel.LoadInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,10 +28,18 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
     private val binding: FragmentLoadInfoBinding by viewBinding(FragmentLoadInfoBinding::bind)
     private var abstractMap: AbstractMap? = null
     private val args: LoadInfoFragmentArgs by navArgs()
+    private val viewModel by viewModels<LoadInfoViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initMap(args.load)
+        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
+            viewModel.routeFlow.collect { outcome ->
+                if (outcome is Outcome.Success) {
+//                    addPolyline(outcome.data)
+                }
+            }
+        }
     }
 
     private fun initMap(load: Load) {
