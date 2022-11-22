@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.here.sdk.routing.Route
 import com.myapp.logistics.R
 import com.myapp.logistics.databinding.FragmentLoadInfoBinding
+import com.myapp.logistics.dialog.LogisticDialog
 import com.myapp.logistics.map.AbstractMap
 import com.myapp.logistics.map.AbstractPosition
 import com.myapp.logistics.map.GoogleMapsImpl
@@ -21,10 +22,7 @@ import com.myapp.logistics.map.camera.CameraStartMovingListener
 import com.myapp.logistics.map.marker.AbstractMarkerOptions
 import com.myapp.logistics.map.polyline.AbstractPolylineOptions
 import com.myapp.logistics.model.Load
-import com.myapp.logistics.util.Constants
-import com.myapp.logistics.util.LogisticsPref
-import com.myapp.logistics.util.Outcome
-import com.myapp.logistics.util.addRepeatingJob
+import com.myapp.logistics.util.*
 import com.myapp.logistics.viewmodel.LoadInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -53,6 +51,14 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                 }
             }
         }
+        binding.btnAcceptOrder.onClick {
+            with(LogisticDialog(requireContext(),"Are you sure accept Order?")){
+                setYesClickListener(yesClickListener = LogisticDialog.YesClickListener {
+
+                })
+                show()
+            }
+        }
     }
 
     private fun setData(load: Load) {
@@ -60,9 +66,9 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
             tvPointA.text = load.aPoint?.address.toString()
             tvPointB.text = load.bPoint?.address.toString()
             tvCustomer.text = "Customer: ${load.customer ?: "Unknown"}"
-            tvDeadline.text = "Deadline: ${load.deadline.toString()}"
-            tvDescription.text = "Description: ${load.description.toString()}"
-            tvStatus.text = "Status: ${load.status.toString()}"
+            tvDeadline.text = "Deadline: ${load.deadline}"
+            tvDescription.text = "Description: ${load.description}"
+            tvStatus.text = "Status: ${load.status}"
             when (load.status) {
                 Constants.NEW -> {
                     if (prefs.userType == Constants.DRIVER_USER_TYPE) {

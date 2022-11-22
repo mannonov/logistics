@@ -28,11 +28,12 @@ class LogisticDialog(context: Context, private val text: String) : Dialog(contex
         binding.btnYes.onClick {
             if (this@LogisticDialog::yesClickListener.isInitialized) {
                 yesClickListener.onYes()
+                dismiss()
             }
         }
     }
 
-    private fun setYesClickListener(yesClickListener: YesClickListener) {
+    fun setYesClickListener(yesClickListener: YesClickListener) {
         this.yesClickListener = yesClickListener
     }
 
