@@ -8,6 +8,7 @@ import com.here.sdk.routing.RoutingEngine
 import com.here.sdk.routing.TruckOptions
 import com.here.sdk.routing.Waypoint
 import com.myapp.logistics.map.AbstractPosition
+import com.myapp.logistics.model.Driver
 import com.myapp.logistics.model.Load
 import com.myapp.logistics.util.Constants
 import com.myapp.logistics.util.Outcome
@@ -45,6 +46,19 @@ class LoadInfoRepositoryImpl @Inject constructor(private val firestore: Firebase
             result(true)
         }.addOnFailureListener {
             result(false)
+        }
+    }
+
+    override suspend fun getDriverData(id: String, result: (result: Driver) -> Unit) {
+        firestore.collection(Constants.DRIVERS).get().addOnCompleteListener { task ->
+            task.result.documents.forEach {
+                if (it.id == id) {
+                    val driver = it.toObject(Driver::class.java)
+                    if (driver != null) {
+                        result(driver)
+                    }
+                }
+            }
         }
     }
 }
