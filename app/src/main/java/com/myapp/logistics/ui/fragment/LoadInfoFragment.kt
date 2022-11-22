@@ -1,7 +1,6 @@
 package com.myapp.logistics.ui.fragment
 
 import android.content.res.Configuration
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -16,7 +15,9 @@ import com.myapp.logistics.map.GoogleMapsImpl
 import com.myapp.logistics.map.camera.CameraStartMovingListener
 import com.myapp.logistics.map.marker.AbstractMarkerOptions
 import com.myapp.logistics.model.Load
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
 
     private val binding: FragmentLoadInfoBinding by viewBinding(FragmentLoadInfoBinding::bind)
@@ -33,14 +34,8 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
             childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
         mapFragment.getMapAsync {
             val googleMapsImpl = GoogleMapsImpl(it)
-            if (abstractMap != null) {
-                abstractMap = null
-                abstractMap = googleMapsImpl
-            } else {
-                abstractMap = googleMapsImpl
-            }
-            googleMapsImpl.setMyLocationIndicator(true, requireContext())
-//            viewModel.getLastKnownLocation()
+            abstractMap = googleMapsImpl
+            abstractMap?.setMyLocationIndicator(true, requireContext())
             when (context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
                 Configuration.UI_MODE_NIGHT_YES -> {
                     abstractMap?.darkMode(true, requireContext())
@@ -52,9 +47,14 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                     abstractMap?.darkMode(false, requireContext())
                 }
             }
-            abstractMap?.addMarker(
+            googleMapsImpl.addMarker(
                 AbstractMarkerOptions<Any>(AbstractPosition(load.aPoint?.lat ?: 0.0, load.aPoint?.lng ?: 0.0)).apply {
-                    icon = BitmapFactory.decodeResource(resources, R.drawable.ic_a_point)
+                    icon = R.drawable.point
+                }
+            )
+            googleMapsImpl.addMarker(
+                AbstractMarkerOptions<Any>(AbstractPosition(load.bPoint?.lat ?: 0.0, load.bPoint?.lng ?: 0.0)).apply {
+                    icon = R.drawable.point
                 }
             )
             abstractMap?.setOnCameraMoveStartedListener(object : CameraStartMovingListener {
