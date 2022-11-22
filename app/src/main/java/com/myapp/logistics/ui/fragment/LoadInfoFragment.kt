@@ -100,17 +100,21 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
             tvDeadline.text = "Deadline: ${load.deadline}"
             tvDescription.text = "Description: ${load.description}"
             tvStatus.text = "Status: ${load.status}"
+            tvAcceptedTime.text = "Accepted time: ${load.acceptedTime.getDate()}"
+            tvCompletedTime.text = "Completed time:  ${load.completedTime.getDate()}"
             when (load.status) {
                 Constants.NEW -> {
                     if (prefs.userType == Constants.DRIVER_USER_TYPE) {
                         containerDriver.visibility = View.GONE
                         btnFinishOrder.visibility = View.GONE
                         btnCallDriver.visibility = View.GONE
+                        binding.containerTimes.visibility = View.GONE
                     } else {
                         containerDriver.visibility = View.GONE
                         btnAcceptOrder.visibility = View.GONE
                         btnFinishOrder.visibility = View.GONE
                         btnCallDriver.visibility = View.GONE
+                        binding.containerTimes.visibility = View.GONE
                     }
                 }
                 Constants.ACTIVE -> {
@@ -124,14 +128,14 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                     }
                 }
                 Constants.COMPLETED -> {
-                    if (prefs.userType == com.myapp.logistics.util.Constants.DRIVER_USER_TYPE) {
-                        btnAcceptOrder.visibility = android.view.View.GONE
-                        btnCallDriver.visibility = android.view.View.GONE
-                        containerDriver.visibility = android.view.View.GONE
+                    if (prefs.userType == Constants.DRIVER_USER_TYPE) {
+                        btnAcceptOrder.visibility = View.GONE
+                        btnCallDriver.visibility = View.GONE
+                        containerDriver.visibility = View.GONE
                         btnFinishOrder.visibility = View.GONE
                     } else {
-                        btnAcceptOrder.visibility = android.view.View.GONE
-                        btnFinishOrder.visibility = android.view.View.GONE
+                        btnAcceptOrder.visibility = View.GONE
+                        btnFinishOrder.visibility = View.GONE
                     }
                 }
             }

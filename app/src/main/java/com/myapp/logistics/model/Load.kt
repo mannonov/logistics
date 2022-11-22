@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken
 import com.myapp.logistics.util.Constants
 import java.io.Serializable
 import java.lang.reflect.Type
-import javax.net.ssl.SSLEngineResult.Status
 
 data class Load(
     var id: String? = null,
@@ -15,7 +14,9 @@ data class Load(
     var deadline: String? = null,
     var description: String? = null,
     var status: String? = "new",
-    var attachedDriverId: String? = null
+    var attachedDriverId: String? = null,
+    var acceptedTime: String? = null,
+    var completedTime: String? = null
 ) : Serializable {
 
     fun getHashMap(): HashMap<String, Any> {
@@ -37,7 +38,8 @@ data class Load(
             Constants.DEADLINE to deadline.toString(),
             Constants.DESCRIPTION to description.toString(),
             Constants.STATUS to newStatus,
-            Constants.DRIVER_ID to driverId
+            Constants.DRIVER_ID to driverId,
+            Constants.ACCEPTED_TIME to System.currentTimeMillis().toString()
         )
     }
 
@@ -49,7 +51,9 @@ data class Load(
             Constants.DEADLINE to deadline.toString(),
             Constants.DESCRIPTION to description.toString(),
             Constants.STATUS to newStatus,
-            Constants.DRIVER_ID to attachedDriverId.toString()
+            Constants.DRIVER_ID to attachedDriverId.toString(),
+            Constants.ACCEPTED_TIME to acceptedTime.toString(),
+            Constants.COMPLETED_TIME to System.currentTimeMillis().toString()
         )
     }
 
@@ -66,6 +70,8 @@ data class Load(
             load.status = hashMap[Constants.STATUS].toString()
             load.id = id
             load.attachedDriverId = hashMap[Constants.DRIVER_ID].toString()
+            load.acceptedTime = hashMap[Constants.ACCEPTED_TIME].toString()
+            load.completedTime = hashMap[Constants.COMPLETED_TIME].toString()
             return load
         }
     }

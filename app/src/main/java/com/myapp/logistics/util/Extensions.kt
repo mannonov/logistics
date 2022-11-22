@@ -1,10 +1,13 @@
 package com.myapp.logistics.util
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayout
+import java.text.SimpleDateFormat
+import java.util.*
 
 inline fun <T : Toolbar> T.navOnClick(crossinline func: T.() -> Unit) =
     setNavigationOnClickListener { func() }
@@ -55,4 +58,16 @@ inline fun <T : TabLayout> T.onTabSelected(crossinline func: T.(position: Int) -
             tab?.position?.let { func(it) }
         }
     })
+}
+
+@SuppressLint("SimpleDateFormat")
+fun String?.getDate(): String? {
+    return try {
+        val yourmilliseconds = this.toString().toLong()
+        val sdf = SimpleDateFormat("MMM dd, yyyy HH:mm")
+        val resultdate = Date(yourmilliseconds)
+        return sdf.format(resultdate)
+    } catch (e: Exception) {
+        "Unknown date"
+    }
 }
