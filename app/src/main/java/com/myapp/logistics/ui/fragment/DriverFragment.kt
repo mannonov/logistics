@@ -23,5 +23,15 @@ class DriverFragment : Fragment(R.layout.fragment_driver) {
             .findFragmentById(R.id.container_nav_host) as NavHostFragment
         val navController = navHostFragment.navController
         binding.navigationBar.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.loadInfoFragment -> showBottomNavigation(false)
+                else -> showBottomNavigation(true)
+            }
+        }
+    }
+
+    private fun showBottomNavigation(boolean: Boolean) {
+        binding.navigationBar.visibility = if (boolean) View.VISIBLE else View.GONE
     }
 }
