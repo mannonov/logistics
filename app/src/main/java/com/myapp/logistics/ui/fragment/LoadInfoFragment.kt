@@ -22,13 +22,18 @@ import com.myapp.logistics.map.marker.AbstractMarkerOptions
 import com.myapp.logistics.map.polyline.AbstractPolylineOptions
 import com.myapp.logistics.model.Load
 import com.myapp.logistics.util.Constants
+import com.myapp.logistics.util.LogisticsPref
 import com.myapp.logistics.util.Outcome
 import com.myapp.logistics.util.addRepeatingJob
 import com.myapp.logistics.viewmodel.LoadInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
+
+    @Inject
+    lateinit var prefs: LogisticsPref
 
     private val binding: FragmentLoadInfoBinding by viewBinding(FragmentLoadInfoBinding::bind)
     private var abstractMap: AbstractMap? = null
@@ -55,12 +60,21 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
             tvPointA.text = load.aPoint?.address.toString()
             tvPointB.text = load.bPoint?.address.toString()
             tvCustomer.text = "Customer: ${load.customer ?: "Unknown"}"
+            tvDeadline.text = "Deadline: ${load.deadline.toString()}"
+            tvDescription.text = "Description: ${load.description.toString()}"
+            tvStatus.text = "Status: ${load.status.toString()}"
             when (load.status) {
                 Constants.NEW -> {
-                    containerDriver.visibility = View.GONE
-                    btnAcceptOrder.visibility = View.GONE
-                    btnFinishOrder.visibility = View.GONE
-                    btnCallDriver.visibility = View.GONE
+                    if (prefs.userType == Constants.DRIVER_USER_TYPE) {
+                        containerDriver.visibility = View.GONE
+                        btnFinishOrder.visibility = View.GONE
+                        btnCallDriver.visibility = View.GONE
+                    } else {
+                        containerDriver.visibility = View.GONE
+                        btnAcceptOrder.visibility = View.GONE
+                        btnFinishOrder.visibility = View.GONE
+                        btnCallDriver.visibility = View.GONE
+                    }
                 }
                 Constants.ACTIVE -> {
                     btnAcceptOrder.visibility = View.GONE
