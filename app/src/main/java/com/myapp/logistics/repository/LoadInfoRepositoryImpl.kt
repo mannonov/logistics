@@ -40,12 +40,11 @@ class LoadInfoRepositoryImpl @Inject constructor(private val firestore: Firebase
 
     override suspend fun finishOrder(load: Load, result: (boolean: Boolean) -> Unit) {
         val docRef = firestore.collection(Constants.LOADS).document(load.id.toString())
-        val updatedLoad: HashMap<String, Any> = load.getFinishHashMap(newStatus = Constants.ACTIVE)
+        val updatedLoad: HashMap<String, Any> = load.getFinishHashMap(newStatus = Constants.COMPLETED)
         docRef.update(updatedLoad).addOnCompleteListener {
             result(true)
         }.addOnFailureListener {
             result(false)
         }
     }
-
 }

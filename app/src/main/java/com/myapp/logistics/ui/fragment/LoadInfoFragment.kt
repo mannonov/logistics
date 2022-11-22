@@ -124,8 +124,15 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                     }
                 }
                 Constants.COMPLETED -> {
-                    btnAcceptOrder.visibility = View.GONE
-                    btnFinishOrder.visibility = View.GONE
+                    if (prefs.userType == com.myapp.logistics.util.Constants.DRIVER_USER_TYPE) {
+                        btnAcceptOrder.visibility = android.view.View.GONE
+                        btnCallDriver.visibility = android.view.View.GONE
+                        containerDriver.visibility = android.view.View.GONE
+                        btnFinishOrder.visibility = View.GONE
+                    } else {
+                        btnAcceptOrder.visibility = android.view.View.GONE
+                        btnFinishOrder.visibility = android.view.View.GONE
+                    }
                 }
             }
         }

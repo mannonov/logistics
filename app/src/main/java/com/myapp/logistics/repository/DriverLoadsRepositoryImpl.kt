@@ -49,9 +49,9 @@ class DriverLoadsRepositoryImpl @Inject constructor(private val firestore: Fireb
         val loads = ArrayList<Load>()
         firestore.collection(Constants.LOADS).get().addOnCompleteListener { task ->
             task.result.documents.forEach { documentSnapshot ->
-                documentSnapshot.data?.get(Constants.COMPLETED)?.let {
+                documentSnapshot.data?.get(Constants.STATUS)?.let {
                     Log.d("sfbhjdsahj", "getNewLoads: $it")
-                    if (it.toString() == Constants.ACTIVE) {
+                    if (it.toString() == Constants.COMPLETED) {
                         val load = Load.toObject(documentSnapshot.data!!, documentSnapshot.id)
                         if (load.attachedDriverId.toString() == id) {
                             loads.add(load)
