@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         runnable = Runnable {
             if (prefs.userType == Constants.DRIVER_USER_TYPE) {
                 viewModel.getLastKnownLocation()
+                Log.d("locationFe", "onCreate: running")
             }
             Handler().postDelayed(runnable, 5000)
         }
