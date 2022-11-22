@@ -41,6 +41,18 @@ data class Load(
         )
     }
 
+    fun getFinishHashMap(newStatus: String): HashMap<String, Any> {
+        return hashMapOf(
+            Constants.A_POINT to gson.toJson(aPoint, pointType),
+            Constants.B_POINT to gson.toJson(bPoint, pointType),
+            Constants.CUSTOMER to customer.toString(),
+            Constants.DEADLINE to deadline.toString(),
+            Constants.DESCRIPTION to description.toString(),
+            Constants.STATUS to newStatus,
+            Constants.DRIVER_ID to attachedDriverId.toString()
+        )
+    }
+
     companion object {
         private val gson = Gson()
         private val pointType: Type = object : TypeToken<Point>() {}.type
