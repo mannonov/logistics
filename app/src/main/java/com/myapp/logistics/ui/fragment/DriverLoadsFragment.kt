@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
@@ -13,10 +14,7 @@ import com.myapp.logistics.R
 import com.myapp.logistics.adapter.LoadsAdapter
 import com.myapp.logistics.databinding.FragmentDriverLoadsBinding
 import com.myapp.logistics.model.Load
-import com.myapp.logistics.util.LogisticsPref
-import com.myapp.logistics.util.Outcome
-import com.myapp.logistics.util.addRepeatingJob
-import com.myapp.logistics.util.onTabSelected
+import com.myapp.logistics.util.*
 import com.myapp.logistics.viewmodel.DriverLoadsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +40,19 @@ class DriverLoadsFragment : Fragment(R.layout.fragment_driver_loads) {
         binding.rvLoads.apply {
             adapter = loadsAdapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+        setFragmentResultListener(LoadInfoFragment::class.java.simpleName) { requestKey, bundle ->
+            val result = bundle.getString(Constants.ORDER_STATUS)
+            when (result) {
+                Constants.ACTIVE -> {
+                    binding.loadsTab.selectTab(binding.loadsTab.getTabAt(1))
+                    viewModel.getActiveLoads(prefs.driver.id.toString())
+                }
+                Constants.COMPLETED -> {
+                    binding.loadsTab.selectTab(binding.loadsTab.getTabAt(2))
+                    viewModel.getCompletedLoads(prefs.driver.id.toString())
+                }
+            }
         }
         binding.loadsTab.onTabSelected { position: Int ->
             when (position) {

@@ -4,9 +4,12 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.SupportMapFragment
@@ -51,11 +54,21 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                 }
             }
         }
+        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
+            viewModel.acceptLoadFlow.collect { outcome ->
+                if (outcome is Outcome.Success) {
+                    setFragmentResult(this@LoadInfoFragment.javaClass.simpleName, bundleOf(Constants.ORDER_STATUS to Constants.ACTIVE))
+                    findNavController().popBackStack()
+                }
+            }
+        }
         binding.btnAcceptOrder.onClick {
-            with(LogisticDialog(requireContext(),"Are you sure accept Order?")){
-                setYesClickListener(yesClickListener = LogisticDialog.YesClickListener {
-
-                })
+            with(LogisticDialog(requireContext(), "Are you sure accept Order?")) {
+                setYesClickListener(
+                    yesClickListener = LogisticDialog.YesClickListener {
+                        viewModel.acceptLoad(args.load, prefs.driver.id.toString())
+                    }
+                )
                 show()
             }
         }
