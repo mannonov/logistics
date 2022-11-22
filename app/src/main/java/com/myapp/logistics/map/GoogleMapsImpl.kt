@@ -12,6 +12,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.Projection
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.myapp.logistics.R
 import com.myapp.logistics.map.camera.*
 import com.myapp.logistics.map.marker.AbstractMarker
 import com.myapp.logistics.map.marker.AbstractMarkerOptions
@@ -213,11 +215,11 @@ class GoogleMapsImpl(var m: GoogleMap) : AbstractMap() {
     }
 
     override fun darkMode(boolean: Boolean, context: Context) {
-//        if (boolean) {
-//            m.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.dark_style_json))
-//        } else {
-//            m.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.light_style_json))
-//        }
+        if (boolean) {
+            m.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.dark_style_json))
+        } else {
+            m.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.light_style_json))
+        }
     }
 
     override fun moveCamera(coords: AbstractCameraPosition, animate: Boolean) {
