@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.myapp.logistics.R
@@ -71,6 +72,11 @@ class DriverLoadsFragment : Fragment(R.layout.fragment_driver_loads) {
                 }
             }
         }
+        loadsAdapter.setLoadClickListener(
+            loadClickedListener = LoadsAdapter.LoadClickedListener {
+                findNavController().navigate(DriverLoadsFragmentDirections.actionDriverLoadsFragmentToLoadInfoFragment())
+            }
+        )
     }
 
     private fun setAdapterData(list: List<Load>) {

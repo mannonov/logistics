@@ -22,6 +22,13 @@ String getHereSdkSecretKey() {
     return properties['HERE_SDK_SECRET_KEY']
 }
 
+String getGoogleMapsApiKey() {
+    def propFile = rootProject.file("./local.properties")
+    def properties = new Properties()
+    properties.load(new FileInputStream(propFile))
+    return properties['GOOGLE_MAPS_API_KEY']
+}
+
 android {
     namespace 'com.myapp.logistics'
     compileSdk 33
@@ -42,12 +49,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             resValue "string", "here_sdk_api_key_value", getHereSdkApiKey()
             resValue "string", "here_sdk_secret_key_value", getHereSdkSecretKey()
+            resValue "string", "google_maps_api_key", getGoogleMapsApiKey()
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             resValue "string", "here_sdk_api_key_value", getHereSdkApiKey()
             resValue "string", "here_sdk_secret_key_value", getHereSdkSecretKey()
+            resValue "string", "google_maps_api_key", getGoogleMapsApiKey()
         }
     }
     compileOptions {
