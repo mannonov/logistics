@@ -29,6 +29,8 @@ object Constants {
     const val PHONE_NUMBER = "phoneNumber"
     const val USER_NAME = "userName"
     const val PASSWORD = "password"
+    const val LAT = "lat"
+    const val LNG = "lng"
 
     // Collections
     const val LOADS = "loads"

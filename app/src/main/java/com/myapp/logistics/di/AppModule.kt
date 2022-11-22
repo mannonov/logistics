@@ -61,5 +61,5 @@ object AppModule {
     fun provideFusedLocationProviderClient(@ApplicationContext appContext: Context): FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(appContext)
 
     @Provides
-    fun provideMainRepository(fusedLocationProviderClient: FusedLocationProviderClient): MainRepository = MainRepositoryImpl(fusedLocationClient = fusedLocationProviderClient)
+    fun provideMainRepository(fusedLocationProviderClient: FusedLocationProviderClient, firestore: FirebaseFirestore): MainRepository = MainRepositoryImpl(fusedLocationClient = fusedLocationProviderClient, firestore = firestore)
 }
