@@ -53,6 +53,7 @@ data class Load(
             load.description = hashMap[Constants.DESCRIPTION].toString()
             load.status = hashMap[Constants.STATUS].toString()
             load.id = id
+            load.attachedDriverId = hashMap[Constants.DRIVER_ID].toString()
             return load
         }
     }

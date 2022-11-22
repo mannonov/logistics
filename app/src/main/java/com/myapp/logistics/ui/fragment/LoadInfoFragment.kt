@@ -72,6 +72,16 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                 show()
             }
         }
+        binding.btnFinishOrder.onClick {
+            with(LogisticDialog(requireContext(), "Are you sure finish Order?")) {
+                setYesClickListener(
+                    yesClickListener = LogisticDialog.YesClickListener {
+                        viewModel.acceptLoad(args.load, prefs.driver.id.toString())
+                    }
+                )
+                show()
+            }
+        }
     }
 
     private fun setData(load: Load) {
@@ -96,7 +106,14 @@ class LoadInfoFragment : Fragment(R.layout.fragment_load_info) {
                     }
                 }
                 Constants.ACTIVE -> {
-                    btnAcceptOrder.visibility = View.GONE
+                    if (prefs.userType == Constants.DRIVER_USER_TYPE) {
+                        btnAcceptOrder.visibility = View.GONE
+                        btnCallDriver.visibility = View.GONE
+                        containerDriver.visibility = View.GONE
+                    } else {
+                        btnAcceptOrder.visibility = View.GONE
+                        btnFinishOrder.visibility = View.GONE
+                    }
                 }
                 Constants.COMPLETED -> {
                     btnAcceptOrder.visibility = View.GONE

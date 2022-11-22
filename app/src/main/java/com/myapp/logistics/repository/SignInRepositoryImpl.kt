@@ -12,6 +12,7 @@ class SignInRepositoryImpl @Inject constructor(private val firestore: FirebaseFi
         firestore.collection(Constants.DRIVERS).get().addOnCompleteListener { task ->
             task.result.documents.forEach { documentSnapshot ->
                 val driver = documentSnapshot.toObject(Driver::class.java)
+                driver?.id = documentSnapshot.id
                 if (driver?.userName == userName && driver.password == password) {
                     result(driver)
                 }
