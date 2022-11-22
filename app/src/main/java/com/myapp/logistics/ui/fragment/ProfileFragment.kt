@@ -38,6 +38,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 tvUserName.text = "Username: ${prefs.driver.userName}"
                 tvUserId.text = "User ID: ${prefs.driver.id}"
             }
+        } else {
+            with(binding) {
+                containerDriverInfo.visibility = View.GONE
+            }
         }
     }
 }

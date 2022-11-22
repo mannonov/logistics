@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loadsFragment_to_addLoadFragment"
             app:destination="@id/addLoadFragment" />
+        <action
+            android:id="@+id/action_loadsFragment_to_loadInfoFragment2"
+            app:destination="@id/loadInfoFragment2" />
     </fragment>
     <fragment
         android:id="@+id/driversFragment2"
@@ -38,4 +41,9 @@
         android:name="com.myapp.logistics.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/loadInfoFragment2"
+        android:name="com.myapp.logistics.ui.fragment.LoadInfoFragment"
+        android:label="fragment_load_info"
+        tools:layout="@layout/fragment_load_info" />
 </navigation>

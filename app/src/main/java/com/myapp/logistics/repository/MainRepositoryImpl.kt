@@ -1,6 +1,7 @@
 package com.myapp.logistics.repository
 
 import android.annotation.SuppressLint
+import android.util.Log
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.firebase.firestore.FirebaseFirestore
 import com.myapp.logistics.map.AbstractPosition
@@ -40,6 +41,10 @@ class MainRepositoryImpl @Inject constructor(private val fusedLocationClient: Fu
     override suspend fun sendDriverLastLocation(driver: Driver, lastLocation: AbstractPosition) {
         val docRef = firestore.collection(Constants.DRIVERS).document(driver.id.toString())
         val updatedDriver = driver.getLocationUpdateHashMap(lastLocation.lat, lastLocation.lng)
-        docRef.update(updatedDriver)
+        docRef.update(updatedDriver).addOnCompleteListener {
+            Log.d("updateLocationStatus", " success sendDriverLastLocation: ${it.result}")
+        }.addOnFailureListener {
+            Log.d("updateLocationStatus", " fail sendDriverLastLocation: $it")
+        }
     }
 }

@@ -50,9 +50,7 @@ class MainActivity : AppCompatActivity() {
             }
             Handler().postDelayed(runnable, 5000)
         }
-
         runnable.run()
-
         Handler().postDelayed(runnable, 5000)
     }
     private val requestMultiplePermissions =
