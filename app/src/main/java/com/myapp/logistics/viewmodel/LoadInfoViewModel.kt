@@ -44,4 +44,20 @@ class LoadInfoViewModel @Inject constructor(private val repository: LoadInfoRepo
             }
         }
     }
+
+    private val _finishLoadFlow = MutableStateFlow<Outcome<Boolean>>(Outcome.loading())
+    val finishLoadFlow = _finishLoadFlow.asStateFlow()
+
+    fun finishLoad(load: Load) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _acceptLoadFlow.emit(Outcome.loading(true))
+            repository.finishOrder(load) {
+                if (it) {
+                    _acceptLoadFlow.value = Outcome.success(true)
+                } else {
+                    _acceptLoadFlow.value = Outcome.failure(Throwable("Something went wrong"))
+                }
+            }
+        }
+    }
 }
