@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken
 import com.myapp.logistics.util.Constants
 import java.io.Serializable
 import java.lang.reflect.Type
+import javax.net.ssl.SSLEngineResult.Status
 
 data class Load(
     var id: String? = null,
@@ -25,6 +26,18 @@ data class Load(
             Constants.DEADLINE to deadline.toString(),
             Constants.DESCRIPTION to description.toString(),
             Constants.STATUS to status.toString()
+        )
+    }
+
+    fun getAcceptHashMap(newStatus: String, driverId: String): HashMap<String, Any> {
+        return hashMapOf(
+            Constants.A_POINT to gson.toJson(aPoint, pointType),
+            Constants.B_POINT to gson.toJson(bPoint, pointType),
+            Constants.CUSTOMER to customer.toString(),
+            Constants.DEADLINE to deadline.toString(),
+            Constants.DESCRIPTION to description.toString(),
+            Constants.STATUS to newStatus,
+            Constants.DRIVER_ID to driverId
         )
     }
 

@@ -14,6 +14,7 @@ object Constants {
     const val DEADLINE = "deadline"
     const val DESCRIPTION = "description"
     const val STATUS = "status"
+    const val DRIVER_ID = "attachedDriverId"
 
     // Load Status
     const val NEW = "new"

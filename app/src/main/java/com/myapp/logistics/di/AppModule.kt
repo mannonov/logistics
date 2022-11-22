@@ -51,5 +51,5 @@ object AppModule {
     fun provideDriverLoadsRepository(firestore: FirebaseFirestore): DriverLoadsRepository = DriverLoadsRepositoryImpl(firestore = firestore)
 
     @Provides
-    fun provideLoadInfoRepository(): LoadInfoRepository = LoadInfoRepositoryImpl()
+    fun provideLoadInfoRepository(firestore: FirebaseFirestore): LoadInfoRepository = LoadInfoRepositoryImpl(firestore = firestore)
 }
