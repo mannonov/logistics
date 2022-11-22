@@ -3,6 +3,8 @@ package com.myapp.logistics.di
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,6 +17,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -52,4 +55,11 @@ object AppModule {
 
     @Provides
     fun provideLoadInfoRepository(firestore: FirebaseFirestore): LoadInfoRepository = LoadInfoRepositoryImpl(firestore = firestore)
+
+    @Singleton
+    @Provides
+    fun provideFusedLocationProviderClient(@ApplicationContext appContext: Context): FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(appContext)
+
+    @Provides
+    fun provideMainRepository(fusedLocationProviderClient: FusedLocationProviderClient): MainRepository = MainRepositoryImpl(fusedLocationClient = fusedLocationProviderClient)
 }
